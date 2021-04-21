@@ -1,165 +1,62 @@
+# Determine Your Scrabble Word's Score
 
-These setup instructions follow **Week 1**, Test-Driven Development with C# from Epicodus's [C# and .Net curriculum](https://www.learnhowtoprogram.com/c-and-net)
+### Authors: *Saoud Rana, Faisal Rana, Tyler Sinks*
+_built April 19 and 20, 2021_
 
-Setting up project from scratch
+## What does this thing do?
+* runs in the console using the .Net framework (version 5.0.x)
+* asks for a word
+* returns your word's score calculated (summed)
+* uses these values for scoring:
 
-[MSTest Configuration and Setup](https://www.learnhowtoprogram.com/c-and-net/test-driven-development-with-c/mstest-configuration-and-setup)
+| Letter                       | Score |
+|------------------------------|-------|
+| A, E, I, O, U, L, N, R, S, T | 1     |
+| D, G                         | 2     |
+| B, C, M, P                   | 3     |
+| F, H, V, W, Y                | 4     |
+| K                            | 5     |
+| J, X                         | 8     |
+| Q, Z                         | 10    |
 
-After running `dotnet restore` and generating `obj` directories. In root directory:
-    `touch .gitignore` and add to file `*/obj/`
+## Setup and Installation
+_the code only depends on just a few built-in namespaces which will be brought into the picture by following these steps_
 
-[MSTest Writing and Running Tests](https://www.learnhowtoprogram.com/c-and-net/test-driven-development-with-c/mstest-writing-and-running-tests)
+1. Use a termainl or console to navigate to the desired directory for this project
+2. Clone the project to your machine:
+>> ` $ git clone https://github.com/sinkstyt/Scrabble.Solution.git `
+3. Change directory into the project's root folder:
+>> ` $ cd Scrabble.Solution `
+4. Restore the project's dependencies:
+>> ` $ dotnet restore Scrabble Scrabble.Tests `
+5. To use the project:
+>> ` $ dotnet run `
+6. Or, to examine the files in VS Code instead of step 5:
+>> ` $ code . `
 
-After setup, navigate to TDDcsharp.Tests and run `dotnet test`
-Tests will pass, even without testing code, because it didn't receive any compiler errors.
+For those completely new to C# and dotnet, please see these detailed instructions:
+* [Installing C# and .NET](https://www.learnhowtoprogram.com/c-and-net-part-time-c-and-react-track/getting-started-with-c/installing-c-and-net)
+* [MSTest Configuration and Setup](https://www.learnhowtoprogram.com/c-and-net/test-driven-development-with-c/mstest-configuration-and-setup)
 
-add `*/bin/` to .gitignore. Generated after running dotnet test
+## Known Bugs
+* No known bugs
 
-[Our First Tests with MSTest](https://www.learnhowtoprogram.com/c-and-net/test-driven-development-with-c/our-first-tests-with-mstest)
+### Support and contact details
+_Please feel free to open an issue or pull request if you would like to make changes to this repository._
+_For contact information, see the Contact section of this README_
 
-Following "Red, Green, Refactor" Workflow, test for isCar was added in this order:
+### Technologies Used
+* _C# and .net5.0_
+* _MS Test_
+* `git` _and GitHub_
+* [C# and .Net curriculum](https://www.learnhowtoprogram.com/c-and-net)
+* _VS Code_
 
-1. Identify the simplest possible behavior the program must exhibit"
-
-```csharp
-my notes: "If string equals "car" return boolean true"
-```
-
-2. Write a coded test
-
-ModelTests/CarDealership.cs
-Note: Typo from previous commit. Change "public class CarDealership" to "public class CarDealershipTest
-```csharp
-    [TestClass]
-    public class CarDealershipTests
-    {
-        [TestMethod]
-        public void isCar_StringEqualCar_True()
-        {
-            CarDealership testCarDealership = new CarDealership();
-            Assert.AreEqual(true, testCarDealership.isCar("car"));
-        }
-    }
-```
-
-
-TDDcsharp/Models/CarDealership.cs 
-(Nothing has changed. No code added yet)
-```csharp
-    public class CarDealership
-    {
-        public bool isCar(string car)
-        {
-            return false;
-        }
-    }
-```
-
-3. Confirm Test Fails
-
-Navigate to TDDcsharp.Tests and run `dotnet test`
-test should fail - this is a good fail - Expected:<True>. Actual:<False>
-a compiler error is not a fail.
-
-4. Implement the behavior with the least amount of code possible
-
-TDDcsharp/Models/TDD.cs 
-```csharp
-    public class CarDealership
-    {
-        public bool isCar(string car)
-        {
-            return car == "car";
-        }
-    }
-```
-
-5. Confirm the test passes
-
-Navigate to TDDchsarp.Tests and run `dotnet test`
-
-6. Confirm previous tests still pass
-    N/A no previous tests at the moment so moving on.
-
-7. Check for refactoring
-    Looks as DRY as it can be at the moment. Moving on.
-
-8. Repeat
-    There is probably more that we could use to define a car. Such as, "4 wheels", "steering wheel", "brakes"
-
-1. Identify the simplest possible behavior the program must exhibit"
-
-```csharp
-my notes: 
-"If string equals "car" return boolean true"
-"Other things makeup a car. If strings equals any of "car", "4 wheels", "steering wheel", "brakes" return boolean true
-```
-2. Write a coded test
-
-ModelTests/CarDealership.cs
-```csharp
-    [TestClass]
-    public class CarDealershipTests
-    {
-        [TestMethod]
-        public void isCar_StringEqualCar_True()
-        {
-            CarDealership testCarDealership = new CarDealership();
-            Assert.AreEqual(true, testCarDealership.isCar("car"));
-        }
-
-        [TestMethod]
-        public void isCar_StringNotEqualCarThings_False()
-        {
-            CarDealership testCarDealership = new CarDealership();
-            Assert.AreEqual(false, testCarDealership.isCar("horse"));
-        }
-    }
-```
-
-3. Confirm test fails
-    yes it does "car does not equal "horse"
-
-4. Implement the behavior with the least amount of code possible
-
-```csharp
-    public class CarDealership
-    {
-        public bool isCar(string car)
-        {
-            string[] whatIsCarArray = {"car", "4 wheels", "brakes", "steering wheel"};
-            
-            foreach (string carThing in whatIsCarArray)
-            {
-                if(car == carThing)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-    }
-```
-
-5. Confirm the test passes
-
-Navigate to TDDchsarp.Tests and run `dotnet test`
-
-6. Confirm previous tests still pass
-    `isCar_StringEqualCar_True()`
-    changed name to `isChar_StringEqualCarThing_True()`
-    test too with other things that should be true like "4 wheels"
-    run test again
-    confirm passes
-
-7. Check for refactoring
-    Looks Dry but perhaps a way to loop over the first test so I don't have to add each thing at a time to test or repeat myself with lots of tests. Will leave as is for now since the array of things that define a car is fixed and confident if one string works then the rest will work
-
-8. Repeat
-    What else can go in my car dealership?
-
-    ## License
+### License
 * [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/saoud/csharp-TDD-template/blob/main/LICENSE)
-* Copyright 2021 Saoud Rana
-## Contact
-[Saoud Rana](mailto:githubissues@saoud.dev)
+* Copyright 2021 :copyright:  Saoud Rana, Faisal Rana, Tyler Sinks
+
+### Contact
+[Saoud Rana](mailto:githubissues@saoud.dev)<br>
+[Faisal Rana](mailto:inquisitive@gmail.com)<br>
+[Tyler Sinks](mailto:tyler.sinks@gmail.com)
