@@ -38,12 +38,11 @@ namespace Scrabble.Models
             {'Z', 10}
         };
         public int LetterScore(char letter) {
-            Console.WriteLine(letter);
             letter = Char.ToUpper(letter);
             return letterValue[letter];
             // return 0;
         }
-        public int WordtoLetter(string inputWord) {
+        public int WordtoScore(string inputWord) {
             int sum = 0;
             Console.WriteLine("-----------------------");
             foreach(char letter in inputWord) {
