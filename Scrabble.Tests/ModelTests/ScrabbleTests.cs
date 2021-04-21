@@ -29,6 +29,15 @@ namespace Scrabble.Tests
             Assert.AreEqual(expected, testResult);
         }
 
+        [TestMethod]
+        public void WordtoLetter_calculateScoreforaWordDay_7()
+        {
+            Word newWord = new Word();
+            int testResult = newWord.WordtoLetter("Day");
+            int expected = 7;
+            Assert.AreEqual(expected, testResult);
+        }
+
         // [TestMethod]
         // public void WordSum_CalculateScoreForAllLettersInWord_13()
         // {
