@@ -30,23 +30,12 @@ namespace Scrabble.Tests
         }
 
         [TestMethod]
-        public void WordtoLetter_calculateScoreforaWordDay_7()
+        public void WordtoScore_calculateScoreforaWordDay_7()
         {
             Word newWord = new Word();
-            int testResult = newWord.WordtoLetter("Day");
+            int testResult = newWord.WordtoScore("Day");
             int expected = 7;
             Assert.AreEqual(expected, testResult);
         }
-
-        // [TestMethod]
-        // public void WordSum_CalculateScoreForAllLettersInWord_13()
-        // {
-        //     //Arrange
-        //     Word newWord = new Word("homonym");
-        //     //Act
-        //     int result = newWord.LetterScore('A');
-        //     //Assert
-        //     Assert.AreEqual(1, result);
-        // }
     }
 }
